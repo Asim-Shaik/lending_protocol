@@ -1,8 +1,6 @@
 use anchor_lang::prelude::*;
-use anchor_spl::{
-    associated_token::AssociatedToken,
-    token_interface::{self, Mint, TokenAccount, TokenInterface, TransferChecked},
-};
+use anchor_spl::associated_token::AssociatedToken;
+use anchor_spl::token_interface::{self, Mint, TokenAccount, TokenInterface, TransferChecked};
 
 use crate::state::{Bank, User};
 
@@ -42,7 +40,7 @@ pub fn process_deposit(ctx: Context<Deposit>, amount: u64) -> Result<()> {
 
     let decimals = ctx.accounts.mint.decimals;
 
-    token_interface::TransferChecked(cpi_ctx, amount, decimals)?;
+    token_interface::transfer_checked(cpi_ctx, amount, decimals)?;
 
     let bank = &mut ctx.accounts.bank;
 

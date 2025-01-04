@@ -1,6 +1,7 @@
 use anchor_lang::prelude::*;
-use instruction::*;
+use instructions::*;
 
+mod constants;
 mod error;
 mod instructions;
 mod state;
@@ -9,6 +10,7 @@ declare_id!("EqSbwFUjVABAMjfEAtokyqq3TeWjUYco9ztP7bz6bd27");
 
 #[program]
 pub mod lending {
+
     use super::*;
 
     pub fn init_bank(
@@ -27,5 +29,17 @@ pub mod lending {
 
     pub fn deposit(ctx: Context<Deposit>, amount: u64) -> Result<()> {
         process_deposit(ctx, amount)
+    }
+
+    pub fn borrow(ctx: Context<Borrow>, amount: u64) -> Result<()> {
+        process_borrow(ctx, amount)
+    }
+
+    pub fn repay(ctx: Context<Repay>, amount: u64) -> Result<()> {
+        process_repay(ctx, amount)
+    }
+
+    pub fn liquidate(ctx: Context<Liquidate>) -> Result<()> {
+        process_liquidate(ctx)
     }
 }
