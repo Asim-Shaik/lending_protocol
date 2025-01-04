@@ -15,12 +15,10 @@ pub mod lending {
 
     pub fn init_bank(
         ctx: Context<InitBank>,
-        liquidaton_threshold: u64,
+        liquidation_threshold: u64,
         max_ltv: u64,
     ) -> Result<()> {
-        process_init_bank(ctx, liquidaton_threshold, max_ltv);
-
-        Ok(())
+        process_init_bank(ctx, liquidation_threshold, max_ltv)
     }
 
     pub fn init_user(ctx: Context<InitUser>, usdc_address: Pubkey) -> Result<()> {
